@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start EOSIO Node",
+      "type": "shell",
+      "command": "nodeos -e -p eosio --plugin eosio::producer_plugin --plugin eosio::chain_api_plugin --plugin eosio::http_plugin --access-control-allow-origin='*' --contracts-console --http-validate-host=false --verbose-http-errors",
+      "presentation": {
+          "reveal": "always",
+          "panel": "new"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+          "pattern": {
+              "regexp": ".*",
+              "file": 1,
+              "location": 2,
+              "message": 3
+          },
+          "background": {
+              "activeOnStart": true,
+              "beginsPattern": ".*Starting.*",
+              "endsPattern": ".*Started.*"
+          }
+      }
+    },  
+    {
+      "label": "Kill EOSIO Node",
+      "type": "shell",
+      "command": "pkill nodeos",
+      "problemMatcher": [],
+      "presentation": {
+          "reveal": "always",
+          "panel": "new"
+      }
+    },
+    {
+      "label": "Replay and Start EOSIO Node",
+      "type": "shell",
+      "command": "nodeos --hard-replay-blockchain -e -p eosio --plugin eosio::producer_plugin --plugin eosio::chain_api_plugin --plugin eosio::http_plugin --access-control-allow-origin='*' --contracts-console --http-validate-host=false --verbose-http-errors >> nodeos.log 2>&1",
+      "presentation": {
+          "reveal": "always",
+          "panel": "new"
+      }
+    }
+  ]
+}
